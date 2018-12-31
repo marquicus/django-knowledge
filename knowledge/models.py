@@ -145,6 +145,7 @@ class Question(KnowledgeBase):
     title = models.CharField(max_length=255, verbose_name=_('Question'),
                              help_text=_('Enter your question or suggestion.'))
     body = MarkupField(blank=True, null=True, verbose_name=_('Description'),
+                       default_markup_type="markdown",
                        help_text=_('Please offer details. Markdown enabled.'))
 
     status = models.CharField(verbose_name=_('Status'), max_length=32,
@@ -245,6 +246,7 @@ class Response(KnowledgeBase):
     question = models.ForeignKey('knowledge.Question', related_name='responses')
 
     body = MarkupField(blank=True, null=True, verbose_name=_('Response'),
+                       default_markup_type="markdown",
                        help_text=_('Please enter your response. Markdown enabled.'))
     status = models.CharField(verbose_name=_('Status'), max_length=32,
                               choices=STATUSES_EXTENDED, default='inherit', db_index=True)
