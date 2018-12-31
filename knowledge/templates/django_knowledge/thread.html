@@ -21,7 +21,7 @@
         &nbsp;{{ question.added }}
       </span></h5>
 
-      {{ question.body|striptags }}
+      {{ question.body }}
 
       {% include "django_knowledge/mod_bar.html" with allowed_mods=allowed_mods.question type="question" node=question %}
     </div>
