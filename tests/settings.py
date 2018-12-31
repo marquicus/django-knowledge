@@ -38,11 +38,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.markup',
 
-    'debug_toolbar',
     'knowledge',
-    'south',
     'django_coverage',
     'mock',
 )

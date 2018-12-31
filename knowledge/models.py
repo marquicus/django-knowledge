@@ -1,9 +1,9 @@
 from knowledge import settings
 
-import django
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings as django_settings
+from markupfield.fields import MarkupField
 
 from knowledge.managers import QuestionManager, ResponseManager
 from knowledge.signals import knowledge_post_save
@@ -144,8 +144,8 @@ class Question(KnowledgeBase):
 
     title = models.CharField(max_length=255, verbose_name=_('Question'),
                              help_text=_('Enter your question or suggestion.'))
-    body = models.TextField(blank=True, null=True, verbose_name=_('Description'),
-                            help_text=_('Please offer details. Markdown enabled.'))
+    body = MarkupField(blank=True, null=True, verbose_name=_('Description'),
+                       help_text=_('Please offer details. Markdown enabled.'))
 
     status = models.CharField(verbose_name=_('Status'), max_length=32,
                               choices=STATUSES, default='private', db_index=True)
@@ -244,8 +244,8 @@ class Response(KnowledgeBase):
 
     question = models.ForeignKey('knowledge.Question', related_name='responses')
 
-    body = models.TextField(blank=True, null=True, verbose_name=_('Response'),
-                            help_text=_('Please enter your response. Markdown enabled.'))
+    body = MarkupField(blank=True, null=True, verbose_name=_('Response'),
+                       help_text=_('Please enter your response. Markdown enabled.'))
     status = models.CharField(verbose_name=_('Status'), max_length=32,
                               choices=STATUSES_EXTENDED, default='inherit', db_index=True)
     accepted = models.BooleanField(default=False)
