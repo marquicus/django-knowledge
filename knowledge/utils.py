@@ -47,6 +47,3 @@ def get_module(path):
             ('Module "{0}" does not define a "{1}" function').format(mod_name, func_name))
 
     return func
-
-
-user_model_label = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
