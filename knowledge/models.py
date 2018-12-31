@@ -45,20 +45,15 @@ class KnowledgeBase(models.Model):
     added = models.DateTimeField(auto_now_add=True)
     lastchanged = models.DateTimeField(auto_now=True)
 
-    user = models.ForeignKey('auth.User' if django.VERSION < (1, 5, 0) else django_settings.AUTH_USER_MODEL, blank=True,
-                             null=True, db_index=True)
-    alert = models.BooleanField(default=settings.ALERTS,
-        verbose_name=_('Alert'),
-        help_text=_('Check this if you want to be alerted when a new'
-                        ' response is added.'))
+    user = models.ForeignKey(django_settings.AUTH_USER_MODEL, blank=True, null=True, db_index=True)
+    alert = models.BooleanField(default=settings.ALERTS, verbose_name=_('Alert'),
+                                help_text=_('Check this if you want to be alerted when a new response is added.'))
 
     # for anonymous posting, if permitted
-    name = models.CharField(max_length=64, blank=True, null=True,
-        verbose_name=_('Name'),
-        help_text=_('Enter your first and last name.'))
-    email = models.EmailField(blank=True, null=True,
-        verbose_name=_('Email'),
-        help_text=_('Enter a valid email address.'))
+    name = models.CharField(max_length=64, blank=True, null=True, verbose_name=_('Name'),
+                            help_text=_('Enter your first and last name.'))
+    email = models.EmailField(blank=True, null=True, verbose_name=_('Email'),
+                              help_text=_('Enter a valid email address.'))
 
     class Meta:
         abstract = True
@@ -83,9 +78,9 @@ class KnowledgeBase(models.Model):
         Get local name, then self.user's first/last, and finally
         their username if all else fails.
         """
-        name = (self.name or (self.user and (
-            u'{0} {1}'.format(self.user.first_name, self.user.last_name).strip()\
-            or self.user.username
+        name = (self.name or (self.user and (u'{0} {1}'.format(
+            self.user.first_name,
+            self.user.last_name).strip() or self.user.username
         )))
         return name.strip() or _("Anonymous")
 
@@ -147,17 +142,13 @@ class Question(KnowledgeBase):
     is_question = True
     _requesting_user = None
 
-    title = models.CharField(max_length=255,
-        verbose_name=_('Question'),
-        help_text=_('Enter your question or suggestion.'))
-    body = models.TextField(blank=True, null=True,
-        verbose_name=_('Description'),
-        help_text=_('Please offer details. Markdown enabled.'))
+    title = models.CharField(max_length=255, verbose_name=_('Question'),
+                             help_text=_('Enter your question or suggestion.'))
+    body = models.TextField(blank=True, null=True, verbose_name=_('Description'),
+                            help_text=_('Please offer details. Markdown enabled.'))
 
-    status = models.CharField(
-        verbose_name=_('Status'),
-        max_length=32, choices=STATUSES,
-        default='private', db_index=True)
+    status = models.CharField(verbose_name=_('Status'), max_length=32,
+                              choices=STATUSES, default='private', db_index=True)
 
     locked = models.BooleanField(default=False)
 
@@ -251,16 +242,12 @@ class Question(KnowledgeBase):
 class Response(KnowledgeBase):
     is_response = True
 
-    question = models.ForeignKey('knowledge.Question',
-        related_name='responses')
+    question = models.ForeignKey('knowledge.Question', related_name='responses')
 
-    body = models.TextField(blank=True, null=True,
-        verbose_name=_('Response'),
-        help_text=_('Please enter your response. Markdown enabled.'))
-    status = models.CharField(
-        verbose_name=_('Status'),
-        max_length=32, choices=STATUSES_EXTENDED,
-        default='inherit', db_index=True)
+    body = models.TextField(blank=True, null=True, verbose_name=_('Response'),
+                            help_text=_('Please enter your response. Markdown enabled.'))
+    status = models.CharField(verbose_name=_('Status'), max_length=32,
+                              choices=STATUSES_EXTENDED, default='inherit', db_index=True)
     accepted = models.BooleanField(default=False)
 
     objects = ResponseManager()

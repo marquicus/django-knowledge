@@ -36,7 +36,7 @@ def QuestionForm(user, *args, **kwargs):
             super(_QuestionForm, self).__init__(*args, **kwargs)
 
             for key in self.fields:
-                if not key in OPTIONAL_FIELDS:
+                if key not in OPTIONAL_FIELDS:
                     self.fields[key].required = True
 
             # hide the internal status for non-staff
@@ -102,7 +102,7 @@ def ResponseForm(user, question, *args, **kwargs):
             super(_ResponseForm, self).__init__(*args, **kwargs)
 
             for key in self.fields:
-                if not key in OPTIONAL_FIELDS:
+                if key not in OPTIONAL_FIELDS:
                     self.fields[key].required = True
 
             # a bit of a hack...

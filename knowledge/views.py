@@ -27,23 +27,21 @@ ALLOWED_MODS = {
 def get_my_questions(request):
 
     if settings.LOGIN_REQUIRED and not request.user.is_authenticated():
-        return HttpResponseRedirect(settings.LOGIN_URL+"?next=%s" % request.path)
+        return HttpResponseRedirect(settings.LOGIN_URL + "?next=%s" % request.path)
 
     if request.user.is_anonymous():
         return None
     else:
-        return Question.objects.can_view(request.user)\
-                               .filter(user=request.user)
+        return Question.objects.can_view(request.user).filter(user=request.user)
 
 
 def knowledge_index(request,
                     template='django_knowledge/index.html'):
 
     if settings.LOGIN_REQUIRED and not request.user.is_authenticated():
-        return HttpResponseRedirect(settings.LOGIN_URL+"?next=%s" % request.path)
+        return HttpResponseRedirect(settings.LOGIN_URL + "?next=%s" % request.path)
 
-    questions = Question.objects.can_view(request.user)\
-                                .prefetch_related('responses__question')[0:20]
+    questions = Question.objects.can_view(request.user).prefetch_related('responses__question')[0:20]
     # this is for get_responses()
     [setattr(q, '_requesting_user', request.user) for q in questions]
 
@@ -52,7 +50,7 @@ def knowledge_index(request,
         'questions': questions,
         'my_questions': get_my_questions(request),
         'categories': Category.objects.all(),
-        'BASE_TEMPLATE' : settings.BASE_TEMPLATE,
+        'BASE_TEMPLATE': settings.BASE_TEMPLATE,
     })
 
 
@@ -62,11 +60,10 @@ def knowledge_list(request,
                    Form=QuestionForm):
 
     if settings.LOGIN_REQUIRED and not request.user.is_authenticated():
-        return HttpResponseRedirect(settings.LOGIN_URL+"?next=%s" % request.path)
+        return HttpResponseRedirect(settings.LOGIN_URL + "?next=%s" % request.path)
 
     search = request.GET.get('title', None)
-    questions = Question.objects.can_view(request.user)\
-                                .prefetch_related('responses__question')
+    questions = Question.objects.can_view(request.user).prefetch_related('responses__question')
 
     if search:
         questions = questions.filter(
@@ -92,7 +89,7 @@ def knowledge_list(request,
         'category': category,
         'categories': Category.objects.all(),
         'form': Form(request.user, initial={'title': search}),  # prefill title
-        'BASE_TEMPLATE' : settings.BASE_TEMPLATE,
+        'BASE_TEMPLATE': settings.BASE_TEMPLATE,
     })
 
 
@@ -103,14 +100,12 @@ def knowledge_thread(request,
                      Form=ResponseForm):
 
     if settings.LOGIN_REQUIRED and not request.user.is_authenticated():
-        return HttpResponseRedirect(settings.LOGIN_URL+"?next=%s" % request.path)
-    
+        return HttpResponseRedirect(settings.LOGIN_URL + "?next=%s" % request.path)
+
     try:
-        question = Question.objects.can_view(request.user)\
-                                   .get(id=question_id)
+        question = Question.objects.can_view(request.user).get(id=question_id)
     except Question.DoesNotExist:
-        if Question.objects.filter(id=question_id).exists() and \
-                                hasattr(settings, 'LOGIN_REDIRECT_URL'):
+        if Question.objects.filter(id=question_id).exists() and hasattr(settings, 'LOGIN_REDIRECT_URL'):
             return redirect(settings.LOGIN_REDIRECT_URL)
         else:
             raise Http404
@@ -137,17 +132,11 @@ def knowledge_thread(request,
         'allowed_mods': ALLOWED_MODS,
         'form': form,
         'categories': Category.objects.all(),
-        'BASE_TEMPLATE' : settings.BASE_TEMPLATE,
+        'BASE_TEMPLATE': settings.BASE_TEMPLATE,
     })
 
 
-def knowledge_moderate(
-        request,
-        lookup_id,
-        model,
-        mod,
-        allowed_mods=ALLOWED_MODS):
-
+def knowledge_moderate(request, lookup_id, model, mod, allowed_mods=ALLOWED_MODS):
     """
     An easy to extend method to moderate questions
     and responses in a vaguely RESTful way.
@@ -162,7 +151,7 @@ def knowledge_moderate(
     """
 
     if settings.LOGIN_REQUIRED and not request.user.is_authenticated():
-        return HttpResponseRedirect(settings.LOGIN_URL+"?next=%s" % request.path)
+        return HttpResponseRedirect(settings.LOGIN_URL + "?next=%s" % request.path)
 
     if request.method != 'POST':
         raise Http404
@@ -197,12 +186,10 @@ def knowledge_moderate(
         return redirect(reverse('knowledge_index'))
 
 
-def knowledge_ask(request,
-                  template='django_knowledge/ask.html',
-                  Form=QuestionForm):
+def knowledge_ask(request, template='django_knowledge/ask.html', Form=QuestionForm):
 
     if settings.LOGIN_REQUIRED and not request.user.is_authenticated():
-        return HttpResponseRedirect(settings.LOGIN_URL+"?next=%s" % request.path)
+        return HttpResponseRedirect(settings.LOGIN_URL + "?next=%s" % request.path)
 
     if request.method == 'POST':
         form = Form(request.user, request.POST)
@@ -220,5 +207,5 @@ def knowledge_ask(request,
         'my_questions': get_my_questions(request),
         'form': form,
         'categories': Category.objects.all(),
-        'BASE_TEMPLATE' : settings.BASE_TEMPLATE,
+        'BASE_TEMPLATE': settings.BASE_TEMPLATE,
     })

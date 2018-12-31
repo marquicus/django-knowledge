@@ -44,8 +44,7 @@ def get_module(path):
         func = getattr(mod, func_name)
     except AttributeError:
         raise ImportError(
-            ('Module "{0}" does not define a "{1}" function'
-                            ).format(mod_name, func_name))
+            ('Module "{0}" does not define a "{1}" function').format(mod_name, func_name))
 
     return func
 

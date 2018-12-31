@@ -60,13 +60,11 @@ def knowledge_post_save(sender, instance, created, **kwargs):
             instances += [instance.question]
 
             # dedupe people who want alerts thanks to dict keys...
-            out_dict = dict([[i.get_email(), i.get_user_or_pair()]
-                            for i in instances if i.alert])
+            out_dict = dict([[i.get_email(), i.get_user_or_pair()] for i in instances if i.alert])
 
         elif isinstance(instance, Question):
             staffers = User.objects.filter(is_staff=True)
-            out_dict = dict([[user.email, user] for user in staffers
-                                if user.has_perm('change_question')])
+            out_dict = dict([[user.email, user] for user in staffers if user.has_perm('change_question')])
 
         # remove the creator...
         if instance.get_email() in out_dict.keys():
