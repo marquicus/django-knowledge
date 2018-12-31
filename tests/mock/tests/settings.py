@@ -1,13 +1,14 @@
 from mock.tests.base import TestCase
 
 from django.test.client import Client
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 
 from knowledge import settings
 from knowledge.models import Question, Response
 from knowledge.forms import QuestionForm, ResponseForm
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class BasicSettingsTest(TestCase):
