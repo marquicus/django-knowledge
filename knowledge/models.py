@@ -1,10 +1,9 @@
 from knowledge import settings
-
+from django.urls import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings as django_settings
 from markupfield.fields import MarkupField
-
 from knowledge.managers import QuestionManager, ResponseManager
 from knowledge.signals import knowledge_post_save
 
@@ -45,7 +44,9 @@ class KnowledgeBase(models.Model):
     added = models.DateTimeField(auto_now_add=True)
     lastchanged = models.DateTimeField(auto_now=True)
 
-    user = models.ForeignKey(django_settings.AUTH_USER_MODEL, blank=True, null=True, db_index=True)
+    user = models.ForeignKey(django_settings.AUTH_USER_MODEL,
+                             blank=True, null=True, db_index=True,
+                             on_delete=models.SET_NULL)
     alert = models.BooleanField(default=settings.ALERTS, verbose_name=_('Alert'),
                                 help_text=_('Check this if you want to be alerted when a new response is added.'))
 
@@ -165,14 +166,13 @@ class Question(KnowledgeBase):
     def __unicode__(self):
         return self.title
 
-    @models.permalink
     def get_absolute_url(self):
         from django.template.defaultfilters import slugify
 
         if settings.SLUG_URLS:
-            return ('knowledge_thread', [self.id, slugify(self.title)])
+            return reverse('knowledge_thread', [self.id, slugify(self.title)])
         else:
-            return ('knowledge_thread_no_slug', [self.id])
+            return reverse('knowledge_thread_no_slug', [self.id])
 
     def inherit(self):
         pass
@@ -243,7 +243,7 @@ class Question(KnowledgeBase):
 class Response(KnowledgeBase):
     is_response = True
 
-    question = models.ForeignKey('knowledge.Question', related_name='responses')
+    question = models.ForeignKey('knowledge.Question', related_name='responses', on_delete=models.CASCADE)
 
     body = MarkupField(blank=True, null=True, verbose_name=_('Response'),
                        default_markup_type="markdown",
