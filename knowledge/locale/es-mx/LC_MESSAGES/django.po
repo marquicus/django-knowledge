@@ -1,0 +1,179 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-07-22 12:12-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: knowledge/templates/django_knowledge/ask.html:5
+#: knowledge/templates/django_knowledge/ask.html:9
+#: knowledge/templates/django_knowledge/list.html:42
+msgid "Ask a Question"
+msgstr ""
+
+#: knowledge/templates/django_knowledge/ask.html:15
+msgid "Please log in to ask a question."
+msgstr "Por favor autentiquese para hacer una pregunta"
+
+#: knowledge/templates/django_knowledge/emails/message.html:6
+#, python-format
+msgid "Hello %(name)s,"
+msgstr "Hola %(name)s,"
+
+#: knowledge/templates/django_knowledge/emails/message.html:9
+#, python-format
+msgid ""
+"\n"
+"        We just wanted to let you know that a new response has been added to "
+"the question \"%(title)s\". You can visit it here: <a href=\"%(domain)s"
+"%(url \")s\"\">%(domain)s%(url \")s</a\">\n"
+"        "
+msgstr ""
+"\n"
+"        Te hacemos saber que tu nueva respuesta fue agregada: "
+"\"%(title)s\". Puedes visitarla aqui: <a href=\"%(domain)s%(url \")s\"\">"
+"%(domain)s%(url \")s</a\">\n"
+"        "
+#: knowledge/templates/django_knowledge/emails/message.html:17
+msgid ""
+"You are receiving these messages because you checked the 'alert' box when "
+"you originally posted."
+msgstr "Estas recibiendo este mensaje porque seleccionaste la caja de 'alerta' cuando agregaste tu post."
+
+#: knowledge/templates/django_knowledge/emails/message.html:21
+#, python-format
+msgid ""
+"\n"
+"        We just wanted to let you know that a new question has been added: "
+"\"%(title)s\". You can visit it here: <a href=\"%(domain)s%(url \")s\"\">"
+"%(domain)s%(url \")s</a\">\n"
+"        "
+msgstr ""
+"\n"
+"        Te hacemos saber que tu nueva pregunta fue agregada: "
+"\"%(title)s\". Puedes visitarla aqui: <a href=\"%(domain)s%(url \")s\"\">"
+"%(domain)s%(url \")s</a\">\n"
+"        "
+#: knowledge/templates/django_knowledge/emails/message.html:29
+msgid "You are receiving these messages because you are a staff member."
+msgstr "Estas recibiendo este mensaje porque eres un miembro staff."
+
+#: knowledge/templates/django_knowledge/emails/message.html:32
+#, python-format
+msgid ""
+"Thank you,\n"
+"    %(name)s team"
+msgstr "Gracias \n\tEquipo %(name)s"
+
+#: knowledge/templates/django_knowledge/form.html:9
+msgid "required"
+msgstr "requerido"
+
+#: knowledge/templates/django_knowledge/index.html:5
+msgid "Support"
+msgstr "Soporte"
+
+#: knowledge/templates/django_knowledge/index.html:10
+#, python-format
+msgid "Top %(count)s Questions"
+msgstr "Top %(count)s preguntas"
+
+#: knowledge/templates/django_knowledge/inner.html:13
+msgid "Start typing your question here."
+msgstr "Inicia tecleando tu pregunta aqui."
+
+#: knowledge/templates/django_knowledge/list.html:20
+msgid "No results found."
+msgstr "No se encontraron resultados."
+
+#: knowledge/templates/django_knowledge/list.html:28
+msgid "previous"
+msgstr "previo"
+
+#: knowledge/templates/django_knowledge/list.html:31
+#, python-format
+msgid "page %(number)s of %(page)s"
+msgstr "pagina %(number)s de %(page)s"
+
+#: knowledge/templates/django_knowledge/list.html:34
+msgid "next"
+msgstr "siguiente"
+
+#: knowledge/templates/django_knowledge/question_list.html:5
+msgid "no responses"
+msgstr "no hay respuestas"
+
+#: knowledge/templates/django_knowledge/question_list.html:5
+msgid "accepted"
+msgstr "aceptado"
+
+#: knowledge/templates/django_knowledge/question_list.html:5
+#: knowledge/templates/django_knowledge/thread.html:18
+#: knowledge/templates/django_knowledge/thread.html:43
+msgid "staff"
+msgstr "staff"
+
+#: knowledge/templates/django_knowledge/sidebar.html:5
+msgid "My Questions"
+msgstr "Mis Preguntas"
+
+#: knowledge/templates/django_knowledge/sidebar.html:18
+msgid "Categories"
+msgstr "Categorias"
+
+#: knowledge/templates/django_knowledge/sidebar.html:29
+msgid "Navigate"
+msgstr "Navegar"
+
+#: knowledge/templates/django_knowledge/sidebar.html:33
+msgid "Ask a question or give suggestion."
+msgstr "Haz una pregunta o da una sugerencia."
+
+#: knowledge/templates/django_knowledge/sidebar.html:34
+msgid "Return to homepage."
+msgstr "Regresa a la pagina principal."
+
+#: knowledge/templates/django_knowledge/thread.html:19
+#: knowledge/templates/django_knowledge/thread.html:44
+msgid "user"
+msgstr "usuario"
+
+#: knowledge/templates/django_knowledge/thread.html:40
+msgid "accepted answer"
+msgstr "respuesta aceptada"
+
+#: knowledge/templates/django_knowledge/thread.html:41
+msgid "poster"
+msgstr "poster"
+
+#: knowledge/templates/django_knowledge/thread.html:55
+msgid "No responses yet."
+msgstr "No hay respuestas aun."
+
+#: knowledge/templates/django_knowledge/thread.html:68
+msgid "This question has been closed."
+msgstr "Esta pregunta ha sido cerrada."
+
+#: knowledge/templates/django_knowledge/thread.html:70
+msgid "Please log in to respond."
+msgstr "Por favor autentiquese para responder."
+
+#: knowledge/templates/django_knowledge/welcome.html:4
+msgid "Welcome to our Support Center."
+msgstr "Bienvenido a nuestro Centro de Soporte."
+
+#: knowledge/templates/django_knowledge/welcome.html:5
+msgid "Search for answers to your questions below, or ask your own."
+msgstr "Busca por respuestas a tus preguntas abajo o haz las tuyas."
