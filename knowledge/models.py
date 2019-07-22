@@ -170,9 +170,9 @@ class Question(KnowledgeBase):
         from django.template.defaultfilters import slugify
 
         if settings.SLUG_URLS:
-            return reverse('knowledge_thread', [self.id, slugify(self.title)])
+            return reverse('knowledge_thread', kwargs={'question_id': self.id, 'slug': slugify(self.title)})
         else:
-            return reverse('knowledge_thread_no_slug', [self.id])
+            return reverse('knowledge_thread_no_slug',  kwargs={'question_id': self.id})
 
     def inherit(self):
         pass
